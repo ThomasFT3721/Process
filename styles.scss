@@ -1,0 +1,481 @@
+$white: #FFFFFF;
+$blue: #2F81F7;
+$grey: #8B949E;
+$background: #0D1117;
+$menu-background: #161B22;
+$font-family_1: "Roboto", sans-serif;
+
+* {
+	box-sizing: border-box;
+	font-family: $font-family_1;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	height: 100vh;
+	overflow: hidden;
+	width: 100vw;
+
+	& > body {
+		height: 100vh;
+		overflow: hidden;
+		width: 100vw;
+
+		& > #menu {
+			background: $menu-background;
+			color: $white;
+			display: flex;
+			flex-direction: column;
+			height: 100%;
+			left: -240px;
+			position: absolute;
+			top: 0;
+			transition: left 0.3s ease-in-out;
+			width: 240px;
+			z-index: 9999;
+
+			&.open {
+				left: 0;
+
+				& > #menu-handler {
+					& > span {
+						margin: 0;
+
+						&#line1 {
+							transform: rotate(45deg) translate(0, 0) translate(-8px, 8px);
+						}
+
+						&#line2 {
+							opacity: 0;
+						}
+
+						&#line3 {
+							transform: rotate(-45deg) translate(-8px, -8px);
+							width: 20px;
+						}
+					}
+				}
+			}
+
+			& > #menu-handler {
+				align-items: center;
+				background: $menu-background;
+				border-bottom-right-radius: 6px;
+				border-top-right-radius: 6px;
+				cursor: pointer;
+				display: flex;
+				flex-direction: column;
+				height: 32px;
+				justify-content: center;
+				position: absolute;
+				right: -32px;
+				top: 8px;
+				width: 32px;
+				z-index: 99999;
+
+				& > span {
+					background: $grey;
+					border-radius: 2px;
+					display: block;
+					height: 2px;
+					left: 50%;
+					position: absolute;
+					top: 50%;
+					transform: translate(-50%, -50%);
+					transition: all 0.3s ease-in-out;
+					width: 20px;
+
+					&#line1 {
+						transform: translate(-50%, calc(-50% - 7px));
+					}
+
+					&#line2 {
+						margin-right: 4px;
+						transform: translate(calc(-50% - 2px), -50%);
+						width: 16px;
+					}
+
+					&#line3 {
+						margin-right: 2px;
+						transform: translate(calc(-50% - 1px), calc(-50% + 7px));
+						width: 18px;
+					}
+				}
+			}
+
+			& > .title {
+				font-size: 24px;
+				font-weight: 600;
+				margin: 24px 0 12px 24px;
+			}
+
+			& > .elements {
+				height: 100%;
+				overflow: auto;
+				padding: 0 8px 16px 16px;
+
+				& > .item {
+					& > .name {
+						&::before {
+							display: none;
+						}
+					}
+				}
+
+				& .item {
+
+					& > .name {
+						align-items: center;
+						background: $menu-background;
+						color: $white;
+						cursor: pointer;
+						display: flex;
+						font-size: 16px;
+						font-weight: 500;
+						height: 20px;
+						margin: 8px 0;
+						position: relative;
+						text-decoration: none;
+
+
+						&:hover {
+							text-decoration: underline;
+						}
+
+						&.active {
+							color: $blue;
+							font-weight: 600;
+						}
+
+						&::before {
+							background: $grey;
+							content: "";
+							height: 2px;
+							left: -14px;
+							position: absolute;
+							top: 10px;
+							transform: translateY(-50%);
+							width: 8px;
+						}
+					}
+
+					& .items {
+						margin-left: 8px;
+						padding-left: 16px;
+						position: relative;
+
+						&::before {
+							background: $grey;
+							content: "";
+							height: calc(100% + 3px);
+							left: 0;
+							position: absolute;
+							top: -3px;
+							width: 2px;
+						}
+
+						& > *:last-child {
+							position: relative;
+
+							&::after {
+								background: $menu-background;
+								bottom: -1px;
+								content: "";
+								height: calc(100% - 10px);
+								left: -17px;
+								position: absolute;
+								width: 4px;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		& > #app {
+			align-items: flex-start;
+			background: $background;
+			color: $white;
+			display: flex;
+			flex-direction: column;
+			height: 100vh;
+			justify-content: flex-start;
+			overflow: auto;
+			width: 100vw;
+
+
+			&[type="process"] {
+				& > #header {
+					.line {
+						align-items: center;
+						display: flex;
+						flex-direction: row;
+						gap: 12px;
+						justify-content: space-between;
+						margin: 12px 0 0;
+
+						.tags {
+							display: flex;
+							flex-direction: row;
+							gap: 12px;
+
+							.tag {
+								align-items: center;
+								background: #21262D;
+								border-radius: 4px;
+								display: flex;
+								flex-direction: row;
+								font-size: 12px;
+								height: 22px;
+								justify-content: center;
+								padding: 4px 12px;
+							}
+						}
+					}
+				}
+
+				& > #content {
+					.process {
+						background: $menu-background;
+						border-radius: 8px;
+						height: 100%;
+						overflow: auto;
+						padding: 0 12px 12px;
+
+						ol {
+							list-style-position: inside;
+							margin-bottom: 16px;
+
+							li {
+								margin-bottom: 8px;
+
+								p {
+									display: inline;
+								}
+							}
+						}
+
+						ul {
+							list-style-position: inside;
+						}
+
+						p {
+							padding: 4px 0;
+						}
+
+						pre {
+							background: #21262D;
+							border-radius: 8px;
+							overflow-x: auto;
+							padding: 12px;
+						}
+
+						h1 {
+							font-size: 28px;
+							font-weight: 900;
+							margin-bottom: 12px;
+						}
+
+						h2 {
+							font-size: 24px;
+							font-weight: 900;
+							margin: 12px 0;
+						}
+
+						h3 {
+							font-size: 20px;
+							font-weight: 900;
+							margin: 12px 0;
+						}
+					}
+				}
+			}
+
+
+			&[type="group"] {
+				& > #content {
+
+					.menu {
+						background: $menu-background;
+						border-radius: 8px;
+						height: 100%;
+						overflow: auto visible;
+						padding: 8px 16px 16px 32px;
+						width: 100%;
+
+						&.main {
+							height: 100%;
+							overflow-y: auto;
+						}
+
+						&.delete-first {
+							& > .item {
+								&.item-group {
+									& > .name {
+										display: none;
+									}
+
+									& > .items {
+										padding-left: 0;
+
+										&::before {
+											display: none;
+										}
+									}
+								}
+							}
+						}
+
+						& .item {
+
+							&.hide {
+								display: none;
+							}
+
+							&.item-group {
+								& > .name {
+									font-size: 20px;
+									font-weight: 600;
+									margin: 16px 0 8px;
+								}
+							}
+
+							& > .name {
+								align-items: center;
+								background: $menu-background;
+								color: $white;
+								cursor: pointer;
+								display: flex;
+								font-size: 16px;
+								font-weight: 500;
+								margin: 8px 0;
+								position: relative;
+								text-decoration: none;
+								width: fit-content;
+
+
+								&:hover {
+									text-decoration: underline;
+								}
+
+								&::before {
+									background: $grey;
+									content: "";
+									height: 2px;
+									left: -14px;
+									position: absolute;
+									top: 10px;
+									transform: translateY(-50%);
+									width: 8px;
+								}
+							}
+
+							& .items {
+								margin-left: 8px;
+								padding-left: 16px;
+								position: relative;
+
+								&::before {
+									background: $grey;
+									content: "";
+									height: calc(100% + 3px);
+									left: 0;
+									position: absolute;
+									top: -3px;
+									width: 2px;
+								}
+
+								& > *:last-child {
+									position: relative;
+
+									&::after {
+										background: $menu-background;
+										bottom: -1px;
+										content: "";
+										height: calc(100% - 10px);
+										left: -17px;
+										position: absolute;
+										width: 4px;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+
+			& > #header {
+				background: $background;
+				display: flex;
+				flex-direction: column;
+				padding: 48px 32px 24px;
+				position: sticky;
+				top: 0;
+				width: 100%;
+				z-index: 1000;
+
+				& > .line {
+					align-items: center;
+					display: flex;
+					gap: 16px;
+					justify-content: space-between;
+
+					& > #search {
+						background: $menu-background;
+						border: 1px solid transparent;
+						border-radius: 4px;
+						color: $white;
+						display: flex;
+						flex-direction: row;
+						height: 32px;
+						outline: none;
+						padding: 0 8px;
+						width: 240px;
+
+						&:focus {
+							border: 1px solid $blue;
+						}
+
+						&::placeholder {
+							color: $grey;
+						}
+					}
+				}
+
+				.breadcrumb {
+					align-items: center;
+					color: $grey;
+					display: flex;
+					flex-direction: row;
+					font-size: 14px;
+					font-weight: 500;
+					gap: 6px;
+
+					& > .item {
+						color: $blue;
+						cursor: pointer;
+						text-decoration: none;
+
+						&:hover {
+							text-decoration: underline;
+						}
+					}
+				}
+
+				.title {
+					font-size: 32px;
+					font-weight: 500;
+				}
+			}
+
+			& > #content {
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-start;
+				padding: 0 32px 32px;
+				width: 100%;
+			}
+		}
+	}
+}

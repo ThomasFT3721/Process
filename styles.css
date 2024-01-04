@@ -1,0 +1,380 @@
+* {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100vh;
+  overflow: hidden;
+  width: 100vw;
+}
+html > body {
+  height: 100vh;
+  overflow: hidden;
+  width: 100vw;
+}
+html > body > #menu {
+  background: #161B22;
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  left: -240px;
+  position: absolute;
+  top: 0;
+  transition: left 0.3s ease-in-out;
+  width: 240px;
+  z-index: 9999;
+}
+html > body > #menu.open {
+  left: 0;
+}
+html > body > #menu.open > #menu-handler > span {
+  margin: 0;
+}
+html > body > #menu.open > #menu-handler > span#line1 {
+  transform: rotate(45deg) translate(0, 0) translate(-8px, 8px);
+}
+html > body > #menu.open > #menu-handler > span#line2 {
+  opacity: 0;
+}
+html > body > #menu.open > #menu-handler > span#line3 {
+  transform: rotate(-45deg) translate(-8px, -8px);
+  width: 20px;
+}
+html > body > #menu > #menu-handler {
+  align-items: center;
+  background: #161B22;
+  border-bottom-right-radius: 6px;
+  border-top-right-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 32px;
+  justify-content: center;
+  position: absolute;
+  right: -32px;
+  top: 8px;
+  width: 32px;
+  z-index: 99999;
+}
+html > body > #menu > #menu-handler > span {
+  background: #8B949E;
+  border-radius: 2px;
+  display: block;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease-in-out;
+  width: 20px;
+}
+html > body > #menu > #menu-handler > span#line1 {
+  transform: translate(-50%, calc(-50% - 7px));
+}
+html > body > #menu > #menu-handler > span#line2 {
+  margin-right: 4px;
+  transform: translate(calc(-50% - 2px), -50%);
+  width: 16px;
+}
+html > body > #menu > #menu-handler > span#line3 {
+  margin-right: 2px;
+  transform: translate(calc(-50% - 1px), calc(-50% + 7px));
+  width: 18px;
+}
+html > body > #menu > .title {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 24px 0 12px 24px;
+}
+html > body > #menu > .elements {
+  height: 100%;
+  overflow: auto;
+  padding: 0 8px 16px 16px;
+}
+html > body > #menu > .elements > .item > .name::before {
+  display: none;
+}
+html > body > #menu > .elements .item > .name {
+  align-items: center;
+  background: #161B22;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: flex;
+  font-size: 16px;
+  font-weight: 500;
+  height: 20px;
+  margin: 8px 0;
+  position: relative;
+  text-decoration: none;
+}
+html > body > #menu > .elements .item > .name:hover {
+  text-decoration: underline;
+}
+html > body > #menu > .elements .item > .name.active {
+  color: #2F81F7;
+  font-weight: 600;
+}
+html > body > #menu > .elements .item > .name::before {
+  background: #8B949E;
+  content: "";
+  height: 2px;
+  left: -14px;
+  position: absolute;
+  top: 10px;
+  transform: translateY(-50%);
+  width: 8px;
+}
+html > body > #menu > .elements .item .items {
+  margin-left: 8px;
+  padding-left: 16px;
+  position: relative;
+}
+html > body > #menu > .elements .item .items::before {
+  background: #8B949E;
+  content: "";
+  height: calc(100% + 3px);
+  left: 0;
+  position: absolute;
+  top: -3px;
+  width: 2px;
+}
+html > body > #menu > .elements .item .items > *:last-child {
+  position: relative;
+}
+html > body > #menu > .elements .item .items > *:last-child::after {
+  background: #161B22;
+  bottom: -1px;
+  content: "";
+  height: calc(100% - 10px);
+  left: -17px;
+  position: absolute;
+  width: 4px;
+}
+html > body > #app {
+  align-items: flex-start;
+  background: #0D1117;
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: flex-start;
+  overflow: auto;
+  width: 100vw;
+}
+html > body > #app[type=process] > #header .line {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  justify-content: space-between;
+  margin: 12px 0 0;
+}
+html > body > #app[type=process] > #header .line .tags {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+html > body > #app[type=process] > #header .line .tags .tag {
+  align-items: center;
+  background: #21262D;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: row;
+  font-size: 12px;
+  height: 22px;
+  justify-content: center;
+  padding: 4px 12px;
+}
+html > body > #app[type=process] > #content .process {
+  background: #161B22;
+  border-radius: 8px;
+  height: 100%;
+  overflow: auto;
+  padding: 0 12px 12px;
+}
+html > body > #app[type=process] > #content .process ol {
+  list-style-position: inside;
+  margin-bottom: 16px;
+}
+html > body > #app[type=process] > #content .process ol li {
+  margin-bottom: 8px;
+}
+html > body > #app[type=process] > #content .process ol li p {
+  display: inline;
+}
+html > body > #app[type=process] > #content .process ul {
+  list-style-position: inside;
+}
+html > body > #app[type=process] > #content .process p {
+  padding: 4px 0;
+}
+html > body > #app[type=process] > #content .process pre {
+  background: #21262D;
+  border-radius: 8px;
+  overflow-x: auto;
+  padding: 12px;
+}
+html > body > #app[type=process] > #content .process h1 {
+  font-size: 28px;
+  font-weight: 900;
+  margin-bottom: 12px;
+}
+html > body > #app[type=process] > #content .process h2 {
+  font-size: 24px;
+  font-weight: 900;
+  margin: 12px 0;
+}
+html > body > #app[type=process] > #content .process h3 {
+  font-size: 20px;
+  font-weight: 900;
+  margin: 12px 0;
+}
+html > body > #app[type=group] > #content .menu {
+  background: #161B22;
+  border-radius: 8px;
+  height: 100%;
+  overflow: auto visible;
+  padding: 8px 16px 16px 32px;
+  width: 100%;
+}
+html > body > #app[type=group] > #content .menu.main {
+  height: 100%;
+  overflow-y: auto;
+}
+html > body > #app[type=group] > #content .menu.delete-first > .item.item-group > .name {
+  display: none;
+}
+html > body > #app[type=group] > #content .menu.delete-first > .item.item-group > .items {
+  padding-left: 0;
+}
+html > body > #app[type=group] > #content .menu.delete-first > .item.item-group > .items::before {
+  display: none;
+}
+html > body > #app[type=group] > #content .menu .item.hide {
+  display: none;
+}
+html > body > #app[type=group] > #content .menu .item.item-group > .name {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 16px 0 8px;
+}
+html > body > #app[type=group] > #content .menu .item > .name {
+  align-items: center;
+  background: #161B22;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: flex;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 8px 0;
+  position: relative;
+  text-decoration: none;
+  width: fit-content;
+}
+html > body > #app[type=group] > #content .menu .item > .name:hover {
+  text-decoration: underline;
+}
+html > body > #app[type=group] > #content .menu .item > .name::before {
+  background: #8B949E;
+  content: "";
+  height: 2px;
+  left: -14px;
+  position: absolute;
+  top: 10px;
+  transform: translateY(-50%);
+  width: 8px;
+}
+html > body > #app[type=group] > #content .menu .item .items {
+  margin-left: 8px;
+  padding-left: 16px;
+  position: relative;
+}
+html > body > #app[type=group] > #content .menu .item .items::before {
+  background: #8B949E;
+  content: "";
+  height: calc(100% + 3px);
+  left: 0;
+  position: absolute;
+  top: -3px;
+  width: 2px;
+}
+html > body > #app[type=group] > #content .menu .item .items > *:last-child {
+  position: relative;
+}
+html > body > #app[type=group] > #content .menu .item .items > *:last-child::after {
+  background: #161B22;
+  bottom: -1px;
+  content: "";
+  height: calc(100% - 10px);
+  left: -17px;
+  position: absolute;
+  width: 4px;
+}
+html > body > #app > #header {
+  background: #0D1117;
+  display: flex;
+  flex-direction: column;
+  padding: 48px 32px 24px;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+html > body > #app > #header > .line {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+}
+html > body > #app > #header > .line > #search {
+  background: #161B22;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: row;
+  height: 32px;
+  outline: none;
+  padding: 0 8px;
+  width: 240px;
+}
+html > body > #app > #header > .line > #search:focus {
+  border: 1px solid #2F81F7;
+}
+html > body > #app > #header > .line > #search::placeholder {
+  color: #8B949E;
+}
+html > body > #app > #header .breadcrumb {
+  align-items: center;
+  color: #8B949E;
+  display: flex;
+  flex-direction: row;
+  font-size: 14px;
+  font-weight: 500;
+  gap: 6px;
+}
+html > body > #app > #header .breadcrumb > .item {
+  color: #2F81F7;
+  cursor: pointer;
+  text-decoration: none;
+}
+html > body > #app > #header .breadcrumb > .item:hover {
+  text-decoration: underline;
+}
+html > body > #app > #header .title {
+  font-size: 32px;
+  font-weight: 500;
+}
+html > body > #app > #content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 0 32px 32px;
+  width: 100%;
+}
+
+/*# sourceMappingURL=styles.css.map */
