@@ -1,11 +1,12 @@
 class HttpRequest {
     static #baseURL = './';
-    static #headers = {};
 
     static async get(url) {
+        const headers = new Headers();
+        headers.append('Content-Type', 'text/plain; charset=UTF-8');
         const response = await fetch(`${this.#baseURL}${url}`, {
             method: 'GET',
-            headers: this.#headers
+            headers: headers
         });
         return await response.text();
     }
@@ -190,7 +191,7 @@ window.buildContent = async function (withHeader = true) {
                                 <div class="tags">${process.tags.map(tag => `<div class="tag">${tag}</div>`).join('')}</div>
                             </div>
                            `;
-                htmlContent = `<div class="process">${converter.makeHtml(await HttpRequest.get(process.url))}</div>`;
+                htmlContent = `<div class="process">${await HttpRequest.get(process.url)}</div>`;
             } else {
                 htmlHeader = `
                         <div class="title">Process not found</div>
@@ -288,6 +289,13 @@ window.applySearch = function () {
             });
         }
     }
+    document.querySelectorAll('*[link]').forEach(item => {
+        item.addEventListener('click', () => {
+            window.currentItemActive = item.getAttribute('href').substring(1);
+            document.querySelector('#menu').classList.remove('open');
+            init();
+        });
+    });
 }
 
 window.init = function () {

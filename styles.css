@@ -196,6 +196,39 @@ html > body > #app[type=process] > #content .process {
   overflow: auto;
   padding: 0 12px 12px;
 }
+html > body > #app[type=process] > #content .process .list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 32px;
+}
+html > body > #app[type=process] > #content .process .list > .list {
+  margin: 0 0 0 32px;
+}
+html > body > #app[type=process] > #content .process .list > .item.inline {
+  align-items: center;
+  display: flex !important;
+  flex-direction: row;
+  gap: 8px;
+  margin: 0 0 8px;
+}
+html > body > #app[type=process] > #content .process .list > .item .code.inline {
+  margin: 0;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+html > body > #app[type=process] > #content .process .list[chip=number] {
+  counter-reset: number;
+}
+html > body > #app[type=process] > #content .process .list[chip=number] > .item {
+  counter-increment: number;
+  display: inline;
+  gap: 4px;
+  position: relative;
+}
+html > body > #app[type=process] > #content .process .list[chip=number] > .item::before {
+  content: counter(number) ". ";
+}
 html > body > #app[type=process] > #content .process ol {
   list-style-position: inside;
   margin-bottom: 16px;
@@ -212,23 +245,33 @@ html > body > #app[type=process] > #content .process ul {
 html > body > #app[type=process] > #content .process p {
   padding: 4px 0;
 }
-html > body > #app[type=process] > #content .process pre {
+html > body > #app[type=process] > #content .process .code, html > body > #app[type=process] > #content .process pre {
   background: #21262D;
   border-radius: 8px;
+  font-family: "Roboto Mono", monospace;
+  font-size: 14px;
+  line-height: 24px;
+  margin: 8px 0;
   overflow-x: auto;
   padding: 12px;
 }
-html > body > #app[type=process] > #content .process h1 {
+html > body > #app[type=process] > #content .process .code *, html > body > #app[type=process] > #content .process pre * {
+  font-family: "Roboto Mono", monospace;
+}
+html > body > #app[type=process] > #content .process pre {
+  line-height: 12px;
+}
+html > body > #app[type=process] > #content .process .h1 {
   font-size: 28px;
   font-weight: 900;
   margin-bottom: 12px;
 }
-html > body > #app[type=process] > #content .process h2 {
+html > body > #app[type=process] > #content .process .h2 {
   font-size: 24px;
   font-weight: 900;
   margin: 12px 0;
 }
-html > body > #app[type=process] > #content .process h3 {
+html > body > #app[type=process] > #content .process .h3 {
   font-size: 20px;
   font-weight: 900;
   margin: 12px 0;

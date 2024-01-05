@@ -243,6 +243,48 @@ html {
 						overflow: auto;
 						padding: 0 12px 12px;
 
+						.list {
+							display: flex;
+							flex-direction: column;
+							gap: 4px;
+							margin-top: 32px;
+
+							& > .list {
+								margin: 0 0 0 32px;
+							}
+
+							& > .item {
+								&.inline {
+									align-items: center;
+									display: flex !important;
+									flex-direction: row;
+									gap: 8px;
+									margin: 0 0 8px;
+								}
+
+								.code.inline {
+									margin: 0;
+									padding: 2px 8px;
+									white-space: nowrap;
+								}
+							}
+
+							&[chip="number"] {
+								counter-reset: number;
+
+								& > .item {
+									counter-increment: number;
+									display: inline;
+									gap: 4px;
+									position: relative;
+
+									&::before {
+										content: counter(number) ". ";
+									}
+								}
+							}
+						}
+
 						ol {
 							list-style-position: inside;
 							margin-bottom: 16px;
@@ -264,26 +306,38 @@ html {
 							padding: 4px 0;
 						}
 
-						pre {
+						.code, pre {
 							background: #21262D;
 							border-radius: 8px;
+							font-family: "Roboto Mono", monospace;
+							font-size: 14px;
+							line-height: 24px;
+							margin: 8px 0;
 							overflow-x: auto;
 							padding: 12px;
+
+							* {
+								font-family: "Roboto Mono", monospace;
+							}
 						}
 
-						h1 {
+						pre {
+							line-height: 12px;
+						}
+
+						.h1 {
 							font-size: 28px;
 							font-weight: 900;
 							margin-bottom: 12px;
 						}
 
-						h2 {
+						.h2 {
 							font-size: 24px;
 							font-weight: 900;
 							margin: 12px 0;
 						}
 
-						h3 {
+						.h3 {
 							font-size: 20px;
 							font-weight: 900;
 							margin: 12px 0;
