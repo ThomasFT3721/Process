@@ -1,34 +1,22 @@
 {
-  "tags": [
-    "DevOps",
-    "Docker",
-    "Apache",
-    "AWS"
-  ],
-  "menu": [
-    {
-      "type": "group",
-      "name": "DevOps",
-      "url": "DevOps",
-      "items": [
-        {
-          "type": "item",
-          "name": "Serveur Apache avec redirection vers des conteneurs Docker sur AWS Lightsail",
-          "url": "devops/serveur_apache_avec_redirection_vers_des_conteneurs_docker_sur_aws_lightsail"
-        }
-      ]
-    }
-  ],
-  "process": {
-    "devops/serveur_apache_avec_redirection_vers_des_conteneurs_docker_sur_aws_lightsail": {
-      "url": "DevOps/serveur_apache_avec_redirection_vers_des_conteneurs_docker_sur_aws_lightsail.html",
-      "title": "Serveur Apache avec redirection vers des conteneurs Docker sur AWS Lightsail",
-      "tags": [
-        "DevOps",
-        "Docker",
-        "Apache",
-        "AWS"
-      ]
-    }
-  }
+	"DevOps/serveur_apache_avec_redirection_vers_des_conteneurs_docker_sur_aws_lightsail": {
+		"url": "DevOps/serveur_apache_avec_redirection_vers_des_conteneurs_docker_sur_aws_lightsail.html",
+		"title": "Serveur Apache avec redirection vers des conteneurs Docker sur AWS Lightsail",
+		"tags": [
+			"DevOps",
+			"Docker",
+			"Apache",
+			"AWS"
+		]
+	},
+	"DevOps/github_repository_registery": {
+		"url": "DevOps/github_repository_registery.html",
+		"title": "Utilisation d'un registre Github Packages pour Apache Maven",
+		"tags": [
+			"DevOps",
+			"Github",
+			"Apache",
+			"Maven"
+		]
+	}
 }

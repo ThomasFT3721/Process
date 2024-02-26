@@ -1,0 +1,75 @@
+<div class="h3">Dans le projet qui va servir de package :</div>
+<div class="list" chip="number">
+	<div class="item">
+		Ajouter dans le fichier <span class="code inline">pom.xml</span> :<br>
+		<div class="code">
+			&lt;distributionManagement&gt;<br>
+			&emsp;&lt;repository&gt;<br>
+			&emsp;&emsp;&lt;id>github&lt;/id&gt;<br>
+			&emsp;&emsp;&lt;name>GitHub OWNER Apache Maven Packages&lt;/name&gt;<br>
+			&emsp;&emsp;&lt;url>https://maven.pkg.github.com/OWNER/REPOSITORY&lt;/url&gt;<br>
+			&emsp;&lt;/repository&gt;<br>
+			&lt;/distributionManagement&gt;
+		</div>
+	</div>
+	<div class="item">
+		Créer un fichier GitHub Actions pour déployer automatiquement les nouvelles versions <span class="code inline">pom.xml</span> :<br>
+		<div class="code">
+			name: Publish package to GitHub Packages<br>
+			on:<br>
+			&emsp;push:<br>
+			&emsp;&emsp;branches:<br>
+			&emsp;&emsp;&emsp;- master<br>
+			jobs:<br>
+			&emsp;publish:<br>
+			&emsp;&emsp;runs-on: ubuntu-latest<br>
+			&emsp;&emsp;permissions:<br>
+			&emsp;&emsp;&emsp;contents: read<br>
+			&emsp;&emsp;&emsp;packages: write<br>
+			&emsp;&emsp;steps:<br>
+			&emsp;&emsp;&emsp;- uses: actions/checkout@v4<br>
+			&emsp;&emsp;&emsp;- uses: actions/setup-java@v3<br>
+			&emsp;&emsp;&emsp;&emsp;with:<br>
+			&emsp;&emsp;&emsp;&emsp;&emsp;java-version: '11'<br>
+			&emsp;&emsp;&emsp;&emsp;&emsp;distribution: 'temurin'<br>
+			&emsp;&emsp;&emsp;- name: Publish package<br>
+			&emsp;&emsp;&emsp;&emsp;run: mvn --batch-mode deploy<br>
+			&emsp;&emsp;&emsp;&emsp;env:<br>
+			&emsp;&emsp;&emsp;&emsp;&emsp;GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+		</div>
+	</div>
+	<div class="item">
+		Push des modifications sur le dépôt GitHub
+	</div>
+</div>
+<br>
+<br>
+<div class="h3">Dans le projet qui va servir de package :</div>
+<div class="list" chip="number">
+	<div class="item">
+		Configurer le fichier <span class="code inline">~.m2/settings.xml</span> pour pouvoir accéder au dépôt
+		(<a href="https://docs.github.com/fr/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry"
+			target="_blank">Voici le lien de la documentation de Github</a>)
+
+	</div>
+	<div class="item">
+		Modifier le fichier <span class="code inline">pom.xml</span> pour ajouter la dépendance :
+		<div class="code">
+			&lt;dependencies&gt;<br>
+			&emsp;...<br>
+			&emsp;&lt;dependency&gt;<br>
+			&emsp;&emsp;&lt;groupId&gt;OWNER&lt;/groupId&gt;<br>
+			&emsp;&emsp;&lt;artifactId&gt;REPOSITORY&lt;/artifactId&gt;<br>
+			&emsp;&emsp;&lt;version&gt;VERSION&lt;/version&gt;<br>
+			&emsp;&lt;/dependency&gt;<br>
+			&emsp;...<br>
+			&lt;/dependencies&gt;
+		</div>
+	</div>
+	<div class="item">
+		Exécuter la commande <span class="code inline">mvn install</span>
+	</div>
+</div>
+<br>
+<br>
+<div class="h3">Bugs :</div>

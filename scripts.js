@@ -20,18 +20,56 @@ class Data {
     static async load() {
         const data = await HttpRequest.get('data.json');
         const json = JSON.parse(data);
-        this.tags = json.tags;
+        this.tags = [];
         this.process = {};
         this.menu = [];
 
-        Object.keys(json.process).forEach(key => {
-            const process = json.process[key];
-            this.process[key] = new Process(process.url, process.title, process.tags);
+        Object.keys(json).forEach(key => {
+            const process = json[key];
+            let url = process.url;
+            this.process[url] = new Process(url, process.title, process.tags);
+
+            let path = key.split('/');
+            let name = process.title;
+
+            for (let i = 0; i < path.length - 1; i++) {
+
+                let item = this.menu.find(item => item.name.toLowerCase() === path[i].toLowerCase() || foundSubGroup(item, path[i].toLowerCase()));
+                if (!item) {
+                    item = new MenuItem('group', path[i], path[i].toLowerCase(), []);
+                    this.menu.push(item);
+                }
+                if (i === path.length - 2) {
+                    let it = item
+                    while (it.name.toLowerCase() !== path[i].toLowerCase()) {
+                        it = it.items.find(subItem => subItem.name.toLowerCase() === path[i].toLowerCase());
+                    }
+                    it.items.push(new MenuItem('item', name, url, []));
+                } else {
+                    let subItem = item.items.find(subItem => subItem.name.toLowerCase() === path[i + 1].toLowerCase());
+                    if (!subItem) {
+                        subItem = new MenuItem('group', path[i + 1], path[i + 1].toLowerCase(), []);
+                        item.items.push(subItem);
+                    }
+                    item = subItem;
+                }
+            }
+
+            process.tags.forEach(tag => {
+                if (!this.tags.includes(tag)) {
+                    this.tags.push(tag);
+                }
+            });
         });
 
-        for (const item of json.menu) {
-            this.menu.push(new MenuItem(item.type, item.name, item.url, item.items));
-        }
+
+        //Sort menu and sub menu and items by name
+        sortMenu(this.menu);
+
+        //Sort tags
+        this.tags.sort((a, b) => {
+            return a.localeCompare(b);
+        });
     }
 }
 
@@ -46,6 +84,7 @@ class Process {
         this.tags = tags;
     }
 }
+
 
 class MenuItem {
     type;
@@ -178,10 +217,10 @@ window.buildContent = async function (withHeader = true) {
     let htmlHeader = '';
     let htmlContent = '';
     if (window.currentItemActive) {
-        const converter = new showdown.Converter();
         const itemAndParent = getItemAndParent(window.currentItemActive);
         if (itemAndParent.item.isItem()) {
             app.setAttribute('type', 'process');
+            console.log(itemAndParent.item.url)
             const process = Data.process[itemAndParent.item.url];
             if (process) {
                 htmlHeader = `
@@ -314,6 +353,31 @@ window.init = function () {
             document.querySelector('#menu').classList.toggle('open');
         });
     }, 100);
+}
+
+window.foundSubGroup = function (item, url) {
+    for (const subItem of item.items) {
+        if (subItem.url.toLowerCase() === url.toLowerCase()) {
+            return true;
+        }
+        if (subItem.items) {
+            if (foundSubGroup(subItem, url)) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+window.sortMenu = function (items) {
+    items.sort((a, b) => {
+        return a.name.localeCompare(b.name);
+    });
+    items.forEach(item => {
+        if (item.items) {
+            sortMenu(item.items);
+        }
+    });
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
